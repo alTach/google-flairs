@@ -1,0 +1,35 @@
+include ../mixins/stat-card.pug
+include ../mixins/info-pill.pug
+
+main.page-shell
+  section.hero-grid
+    .hero-panel.surface
+      +infoPill("sourceBadge", "GitHub keywords source")
+      .hero-panel__eyebrow(data-i18n="eyebrow") Google Calendar • event flairs
+      h1.hero-panel__title(data-i18n="title") Google Calendar event flairs
+      p.hero-panel__lead(data-i18n="lead")
+        | Each flair is rendered as two separate cards: one for the SVG asset and one for the image asset.
+        | Click a card to copy its keyword.
+    aside.stats-panel.surface
+      +statCard("totalCount", "codesTotal", "0")
+      +statCard("visibleCount", "cardsVisible", "0")
+      +statCard("groupCount", "groups", "0")
+      +statCard("langLabel", "language", "EN")
+
+  section.controls.surface
+    label.sr-only(for="search") Search
+    input#search.control-input(
+      type="search"
+      placeholder="Search: birthday, yoga, xmas, dinner, AGDQ…"
+      autocomplete="off"
+    )
+    label.sr-only(for="language") Language
+    select#language.control-select(title="Uses browser Translator API when available")
+
+  section.filters-wrap
+    #filters.filters(aria-label="Flair categories")
+
+  section#grid.card-grid(aria-live="polite")
+  div#empty.empty-state.hidden(data-i18n="empty") Nothing found. Try another search or category.
+
+#toast.toast(role="status" aria-live="polite") Copied

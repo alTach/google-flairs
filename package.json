@@ -1,0 +1,23 @@
+{
+  "name": "google-calendar-flairs",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "qweqwe": "node script/update-flairs.js --path=src/data"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.10",
+    "pug": "3.0.3",
+    "sass": "1.92.0",
+    "tailwindcss": "4.1.10",
+    "vite": "6.3.5",
+    "vite-plugin-pug": "0.4.1"
+  }
+}

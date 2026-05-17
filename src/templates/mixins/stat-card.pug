@@ -1,0 +1,4 @@
+mixin statCard(id, labelKey, value)
+  .stat-card
+    strong.stat-card__value(id=id)= value
+    span.stat-card__label(data-i18n=labelKey)= labelKey

@@ -1,0 +1,20 @@
+mixin flairCard(item, format, helpers)
+  - const category = helpers.getCategory(item)
+  - const key = `${item.key}-${format}`
+  - const imageSource = format === "svg" ? helpers.svgUrl(item.image) : helpers.jpgUrl(item.image)
+  article.flair-card(
+    style=`border-color:color-mix(in srgb, ${category.color} 24%, #cbd5e1)`
+    data-card=key
+    data-flair-key=item.key
+    data-category=category.key
+    data-name=item.name
+    data-search=[item.name, item.code].join(" ").toLowerCase()
+    data-format=format
+  )
+    img.flair-card__image(src=imageSource alt="" loading="lazy")
+    .flair-card__veil
+    .flair-card__marker= format.toUpperCase()
+    button.flair-card__copy(type="button" data-action="copy" data-code=item.code)
+      h2.flair-card__title(data-title=key data-name=item.name)= item.name
+      .flair-card__meta
+        span.flair-card__code= item.code
