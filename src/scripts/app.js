@@ -31,7 +31,9 @@ const elements = {
   groupCount: document.querySelector("#groupCount"),
   langLabel: document.querySelector("#langLabel"),
   toast: document.querySelector("#toast"),
-  sourceBadge: document.querySelector("#sourceBadge")
+  sourceBadge: document.querySelector("#sourceBadge"),
+  imageDialog: document.querySelector("#imageDialog"),
+  imageDialogMedia: document.querySelector("#imageDialogMedia")
 };
 
 elements.language.innerHTML = languageOptions
@@ -256,7 +258,13 @@ function escapeHtml(value) {
 function openImage(key) {
   const item = flairItems.find((candidate) => candidate.key === key);
   if (!item) return;
-  window.open(getImageUrl(item.image, getFormat(key)), "_blank", "noopener,noreferrer");
+  const shortest = getShortestAssociation(item, state.language);
+  elements.imageDialogMedia.src = getImageUrl(item.image, getFormat(key));
+  elements.imageDialogMedia.alt = shortest;
+
+  if (!elements.imageDialog.open) {
+    elements.imageDialog.showModal();
+  }
 }
 
 elements.search.addEventListener("input", (event) => {
@@ -311,6 +319,18 @@ elements.grid.addEventListener("click", async (event) => {
   if (card) {
     openImage(card.dataset.card);
   }
+});
+
+elements.imageDialog?.addEventListener("click", (event) => {
+  const surface = event.target.closest(".image-dialog__surface");
+  if (!surface) {
+    elements.imageDialog.close();
+  }
+});
+
+elements.imageDialog?.addEventListener("close", () => {
+  elements.imageDialogMedia.removeAttribute("src");
+  elements.imageDialogMedia.removeAttribute("alt");
 });
 
 export async function initApp() {

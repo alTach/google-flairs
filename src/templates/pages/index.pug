@@ -33,3 +33,7 @@ main.page-shell
   div#empty.empty-state.hidden(data-i18n="empty") Nothing found. Try another search or category.
 
 #toast.toast(role="status" aria-live="polite") Copied
+dialog#imageDialog.image-dialog
+  form.image-dialog__surface(method="dialog")
+    button.image-dialog__close(type="submit" aria-label="Close") ×
+    img#imageDialogMedia.image-dialog__media(src="" alt="")

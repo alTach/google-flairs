@@ -461,6 +461,61 @@ select {
   transform: translateX(-50%) translateY(0);
 }
 
+.image-dialog {
+  width: min(92vw, 1120px);
+  max-width: 1120px;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.image-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.image-dialog__surface {
+  position: relative;
+  margin: 0;
+  padding: 18px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.82)),
+    rgba(15, 23, 42, 0.86);
+  box-shadow: 0 32px 100px rgba(15, 23, 42, 0.34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-dialog__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.image-dialog__media {
+  display: block;
+  width: 100%;
+  max-height: min(84vh, 980px);
+  border-radius: 20px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -484,5 +539,16 @@ select {
 
   .controls {
     grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .image-dialog__surface {
+    padding: 12px;
+    border-radius: 22px;
+  }
+
+  .image-dialog__media {
+    border-radius: 16px;
   }
 }
