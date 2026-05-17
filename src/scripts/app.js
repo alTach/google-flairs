@@ -135,6 +135,7 @@ function renderGrid(visibleFlairs) {
       return renderCard(item);
     })
     .join("");
+  syncCardMedia();
 }
 
 function render() {
@@ -217,6 +218,7 @@ function updateCard(key) {
   if (!item || !currentCard || !state.visibleKeys.includes(key)) return;
 
   currentCard.outerHTML = renderCard(item);
+  syncCardMedia(key);
 }
 
 function setExpandedCard(key) {
@@ -238,6 +240,24 @@ function syncExpandedState(key, expanded) {
 
   card.classList.toggle("is-expanded", expanded);
   card.querySelector(".flair-card__panel")?.classList.toggle("is-visible", expanded);
+}
+
+function syncCardMedia(targetKey) {
+  const selector = targetKey ? `[data-card="${targetKey}"] .flair-card__image` : ".flair-card__image";
+  elements.grid.querySelectorAll(selector).forEach((image) => {
+    const markReady = () => {
+      image.closest("[data-card]")?.classList.add("is-media-ready");
+    };
+
+    if (image.complete && image.naturalWidth > 0) {
+      markReady();
+      return;
+    }
+
+    image.closest("[data-card]")?.classList.remove("is-media-ready");
+    image.addEventListener("load", markReady, { once: true });
+    image.addEventListener("error", markReady, { once: true });
+  });
 }
 
 function escapeAttribute(value) {
