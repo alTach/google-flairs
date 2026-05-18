@@ -1,20 +1,60 @@
-mixin flairCard(item, format, helpers)
+mixin flairCard(item, helpers, ui)
   - const category = helpers.getCategory(item)
-  - const key = `${item.key}-${format}`
-  - const imageSource = format === "svg" ? helpers.svgUrl(item.image) : helpers.jpgUrl(item.image)
+  - const imageSource = helpers.svgUrl(item.image)
   article.flair-card(
     style=`border-color:color-mix(in srgb, ${category.color} 24%, #cbd5e1)`
-    data-card=key
-    data-flair-key=item.key
+    data-card=item.key
     data-category=category.key
-    data-name=item.name
-    data-search=[item.name, item.code].join(" ").toLowerCase()
-    data-format=format
+    data-code=item.code
+    data-image=item.image
+    data-search-en=item.searchEn
+    data-current-search=item.searchEn
+    data-copy-en=item.shortestEn
+    data-words-en=item.wordsEn
+    data-count-en=item.countEn
+    data-format="svg"
   )
-    img.flair-card__image(src=imageSource alt="" loading="lazy")
-    .flair-card__veil
-    .flair-card__marker= format.toUpperCase()
-    button.flair-card__copy(type="button" data-action="copy" data-code=item.code)
-      h2.flair-card__title(data-title=key data-name=item.name)= item.name
+    button.flair-card__preview(type="button")
+      img.flair-card__image(
+        src=imageSource
+        alt=item.shortestEn
+        loading="lazy"
+        decoding="async"
+      )
+      span.flair-card__veil
+    .flair-card__switch(role="tablist" aria-label="Image format")
+      button.flair-card__switch-option.is-active(
+        type="button"
+        role="tab"
+        aria-selected="true"
+        data-action="set-format"
+        data-key=item.key
+        data-format="svg"
+      ) svg
+      button.flair-card__switch-option(
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-action="set-format"
+        data-key=item.key
+        data-format="img"
+      ) img
+    .flair-card__body
       .flair-card__meta
-        span.flair-card__code= item.code
+        button.flair-card__copy(
+          type="button"
+          data-action="copy"
+          data-copy=item.shortestEn
+          data-role="copy"
+        )= item.shortestEn
+        button.flair-card__count(
+          type="button"
+          data-action="toggle-panel"
+          data-key=item.key
+          data-role="count"
+        )= `+${item.countEn}`
+    .flair-card__panel
+      button.flair-card__close(type="button" aria-label="Close" data-action="close-panel") ×
+      p.flair-card__hint(data-role="hint")= ui.en.revealHint
+      p.flair-card__panel-title(data-role="panel-title")= ui.en.associationsTitle
+      p.flair-card__words(data-role="words")= item.wordsEn
