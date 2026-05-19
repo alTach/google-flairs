@@ -38,7 +38,6 @@ main.page-shell
           style=`background:${background};border-color:color-mix(in srgb, ${category.color} 35%, #cbd5e1);color:${color}`
           data-category=category.key
           data-label-en=category.name
-          data-label-ru=category.ru || category.name
         )= category.name
 
   section#grid.card-grid(aria-live="polite")
