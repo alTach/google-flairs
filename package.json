@@ -5,19 +5,23 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "qweqwe": "node script/update-flairs.js --path=src/data"
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-server && node prerender.js",
+    "preview": "vite preview"
   },
   "engines": {
     "node": ">=20.19.0"
   },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0"
+  },
   "devDependencies": {
-    "@tailwindcss/vite": "4.1.10",
-    "pug": "3.0.3",
-    "sass": "1.92.0",
-    "tailwindcss": "4.1.10",
-    "vite": "6.3.5",
-    "vite-plugin-pug": "0.4.1"
+    "@tailwindcss/vite": "^4.3.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.13"
   }
 }

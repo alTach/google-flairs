@@ -1,16 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Google Calendar Flairs</title>
-    <meta
-      name="description"
-      content="Google Calendar event flair browser built with Vite, Pug, Tailwind, and SCSS."
-    />
+    <meta name="description" content="Google Calendar event flair browser built with React and Tailwind CSS." />
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   </head>
-  <body>
-    <pug src="src/templates/pages/index.pug" />
-    <script type="module" src="/src/main.js"></script>
+  <body class="font-sans antialiased text-slate-900">
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>
