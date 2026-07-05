@@ -5,6 +5,7 @@ import { HeroPanel } from "./HeroPanel";
 import { StatsPanel } from "./StatsPanel";
 import { Controls } from "./Controls";
 import { Filters } from "./Filters";
+import { Footer } from "./Footer";
 import { FlairCard } from "./FlairCard";
 import { ImageDialog } from "./ImageDialog";
 import { UI, categoryRules, categories } from "@/lib/constants";
@@ -117,11 +118,7 @@ export function FlareBrowser({ initialFlairs, languages }) {
       <Controls
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        language={language}
-        onLanguageChange={setLanguage}
-        languageOptions={languages}
         uiStrings={uiStrings}
-        isTranslating={isTranslating}
         layout={layout}
         onLayoutChange={setLayout}
         globalFormat={globalFormat}
@@ -136,7 +133,7 @@ export function FlareBrowser({ initialFlairs, languages }) {
 
       <section className={clsx(
         "grid gap-4.5",
-        layout === "grid" ? "grid-cols-[repeat(auto-fill,minmax(350px,1fr))]" : "grid-cols-1"
+        layout === "grid" ? "grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]" : "grid-cols-1"
       )} aria-live="polite">
         {filteredFlairs.map((item) => (
           <FlairCard
@@ -158,6 +155,14 @@ export function FlareBrowser({ initialFlairs, languages }) {
           </div>
         )}
       </section>
+
+      <Footer
+        language={language}
+        onLanguageChange={setLanguage}
+        languageOptions={languages}
+        uiStrings={uiStrings}
+        isTranslating={isTranslating}
+      />
 
       <div className={clsx(
         "fixed left-1/2 bottom-6 z-50 px-4 py-3 rounded-[18px] bg-slate-950 text-white text-[0.84rem] font-extrabold pointer-events-none transition-all duration-180",

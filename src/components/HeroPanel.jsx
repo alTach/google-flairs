@@ -14,7 +14,7 @@ export function HeroPanel({ uiStrings }) {
         {uiStrings.eyebrow}
       </div>
       </div>
-      <h1 className="max-w-[12ch] m-0 text-[clamp(3rem,6vw,5rem)] leading-[0.92] font-black tracking-tighter">
+      <h1 className="m-0 text-[clamp(3rem,6vw,5rem)] leading-[0.92] font-black tracking-tighter">
         {uiStrings.title}
       </h1>
       <p className="max-w-[44rem] mt-5 mb-0 text-slate-600 text-[1.05rem] leading-[1.8]">
