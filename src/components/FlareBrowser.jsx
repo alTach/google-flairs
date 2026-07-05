@@ -16,6 +16,8 @@ export function FlareBrowser({ initialFlairs, languages }) {
   const [language, setLanguage] = useState("en");
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
+  const [layout, setLayout] = useState("grid");
+  const [globalFormat, setGlobalFormat] = useState("svg");
   const [toastMessage, setToastMessage] = useState("");
 
   useEffect(() => {
@@ -74,6 +76,11 @@ export function FlareBrowser({ initialFlairs, languages }) {
     setFormats(prev => ({ ...prev, [key]: format }));
   }, []);
 
+  const handleGlobalFormatChange = useCallback((format) => {
+    setGlobalFormat(format);
+    setFormats({}); // Clear individual overrides so all cards switch
+  }, []);
+
   const handleCopy = useCallback(async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -115,6 +122,10 @@ export function FlareBrowser({ initialFlairs, languages }) {
         languageOptions={languages}
         uiStrings={uiStrings}
         isTranslating={isTranslating}
+        layout={layout}
+        onLayoutChange={setLayout}
+        globalFormat={globalFormat}
+        onGlobalFormatChange={handleGlobalFormatChange}
       />
 
       <Filters
@@ -123,13 +134,16 @@ export function FlareBrowser({ initialFlairs, languages }) {
         categories={displayCategories}
       />
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4.5" aria-live="polite">
+      <section className={clsx(
+        "grid gap-4.5",
+        layout === "grid" ? "grid-cols-[repeat(auto-fill,minmax(350px,1fr))]" : "grid-cols-1"
+      )} aria-live="polite">
         {filteredFlairs.map((item) => (
           <FlairCard
             key={item.key}
             item={item}
             uiStrings={uiStrings}
-            currentFormat={formats[item.key] || "svg"}
+            currentFormat={formats[item.key] || globalFormat}
             onFormatChange={handleFormatChange}
             onImageOpen={(src, alt) => {
               setDialogImage({ src, alt });
