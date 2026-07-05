@@ -36,7 +36,7 @@ export function ImageDialog({ isOpen, src, alt, onClose }) {
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-3.5 right-3.5 z-10 w-10.5 h-10.5 border-0 rounded-full bg-white/10 text-white text-2xl leading-none cursor-pointer flex items-center justify-center hover:bg-white/20 transition-colors"
+          className="absolute top-3.5 right-3.5 z-10 w-10.5 h-10.5 border-0 rounded-full  text-white text-2xl leading-none cursor-pointer flex items-center justify-center bg-white/40 hover:bg-white/60 transition-colors"
           aria-label="Close"
         >
           ×

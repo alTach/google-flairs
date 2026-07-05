@@ -27,6 +27,26 @@ export function getLanguageOptions() {
   return options;
 }
 
+/**
+ * Detects the system/browser language from `navigator` and matches it against supported languages.
+ * 
+ * Example of what might end up in `browserLangs`:
+ * - ["en-US", "en", "ru-RU", "ru"] (from navigator.languages)
+ * - ["ru-RU"] (fallback from navigator.language)
+ */
+export function detectLanguage(supportedLanguages) {
+  if (typeof navigator === "undefined") return "en";
+  const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage];
+  for (const bLang of browserLangs) {
+    if (!bLang) continue;
+    const code = bLang.split("-")[0].toLowerCase();
+    if (supportedLanguages.some(([langCode]) => langCode === code)) {
+      return code;
+    }
+  }
+  return "en";
+}
+
 export function getFlairsForLanguage(lang = "en") {
   const englishPayload = jsonFiles['../data/en.json'].default || jsonFiles['../data/en.json'];
   const englishEntries = englishPayload?.[0]?.[1] ?? [];

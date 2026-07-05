@@ -47,7 +47,7 @@ export function FlairCard({ item, uiStrings, currentFormat, onFormatChange, onIm
         decoding="async"
         className={clsx("cursor-pointer absolute inset-0 w-full h-full object-cover transition-opacity duration-180")}
       />
-      <span className="absolute inset-0 bg-gradient-to-b from-slate-900/5 to-slate-900/80 pointer-events-none"></span>
+      <span className="absolute inset-0 bg-gradient-to-b from-slate-900/5 to-slate-900/30 pointer-events-none"></span>
 
       <div className="absolute top-3 right-3 z-10 inline-grid grid-cols-2 gap-1 p-1 rounded-full bg-slate-900/75">
         <button

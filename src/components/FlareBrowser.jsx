@@ -9,7 +9,7 @@ import { FlairCard } from "./FlairCard";
 import { ImageDialog } from "./ImageDialog";
 import { UI, categoryRules, categories } from "@/lib/constants";
 import { clsx } from "clsx";
-import { getFlairsForLanguage } from "@/lib/data";
+import { getFlairsForLanguage, detectLanguage } from "@/lib/data";
 import { translateUiStrings, translateCategories } from "@/lib/translator";
 
 export function FlareBrowser({ initialFlairs, languages }) {
@@ -17,6 +17,13 @@ export function FlareBrowser({ initialFlairs, languages }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [toastMessage, setToastMessage] = useState("");
+
+  useEffect(() => {
+    const defaultLang = detectLanguage(languages);
+    if (defaultLang !== "en") {
+      setLanguage(defaultLang);
+    }
+  }, []);
   
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogImage, setDialogImage] = useState({ src: "", alt: "" });
@@ -116,7 +123,7 @@ export function FlareBrowser({ initialFlairs, languages }) {
         categories={displayCategories}
       />
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4.5" aria-live="polite">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4.5" aria-live="polite">
         {filteredFlairs.map((item) => (
           <FlairCard
             key={item.key}
